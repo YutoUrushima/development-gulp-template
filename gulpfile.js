@@ -10,10 +10,12 @@ const browserSync = require('browser-sync');
 const paths = {
     root: 'src/',
     dist: 'dist/',
-    sass: 'src/assets/styles/**/*.scss',
-    css: 'dist/assets/styles/',
     pug: 'src/**/*.pug',
     html: 'dist/',
+    sass: 'src/assets/styles/**/*.scss',
+    css: 'dist/assets/styles/',
+    srcJs: 'src/assets/js/**/*.js',
+    distJs: 'dist/assets/js/',
 }
 
 // pug
@@ -43,6 +45,13 @@ const Sass = (done) => {
     done();
 }
 
+// js
+const Js = (done) => {
+    return src(paths.srcJs)
+        .pipe(dest(paths.distJs));
+    done();
+}
+
 // browserSync
 const BrowserSync = (done) => {
     return browserSync.init({
@@ -63,6 +72,7 @@ const Reload = (done) => {
 exports.default = () => {
     watch(paths.pug, series(Pug, Reload));
     watch(paths.sass, series(Sass, Reload));
+    watch(paths.srcJs, series(Js, Reload));
     BrowserSync();
 }
 exports.build = parallel(Pug, Sass);
