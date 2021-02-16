@@ -4,10 +4,12 @@ const pug = require('gulp-pug');
 const sass = require('gulp-sass');
 const plumber = require('gulp-plumber');
 const notify = require('gulp-notify');
+const browserSync = require('browser-sync');
 
 // パスの設定
 const paths = {
     root: 'src/',
+    dist: 'dist/',
     sass: 'src/assets/styles/**/*.scss',
     css: 'dist/assets/styles/',
     pug: 'src/**/*.pug',
@@ -15,7 +17,7 @@ const paths = {
 }
 
 // pug
-const html = (done) => {
+const Pug = (done) => {
     return src(paths.pug)
         .pipe(
         plumber({ errorHandler: notify.onError('Error: <%= error.message %>') })
@@ -31,7 +33,7 @@ const html = (done) => {
 }
 
 // sass
-const css = (done) => {
+const Sass = (done) => {
     return src(paths.sass)
       .pipe(
         plumber({ errorHandler: notify.onError('Error: <%= error.message %>') })
@@ -41,8 +43,26 @@ const css = (done) => {
     done();
 }
 
-exports.default = () => {
-    watch(paths.pug, html);
-    watch(paths.sass, css);
+// browserSync
+const BrowserSync = (done) => {
+    return browserSync.init({
+        server: {
+            baseDir: paths.dist
+        },
+        reloadOnRestart: true
+    });
 }
-exports.build = parallel(html, css);
+
+// browserSync reload
+const Reload = (done) => {
+    browserSync.reload();
+    done();
+};
+
+// npx gulpでの操作
+exports.default = () => {
+    watch(paths.pug, series(Pug, Reload));
+    watch(paths.sass, series(Sass, Reload));
+    BrowserSync();
+}
+exports.build = parallel(Pug, Sass);
