@@ -1,8 +1,11 @@
 @import 'modules/color.scss';
 @import 'modules/breakpoint.scss';
 
-h1 {
-    color: $color-theme;
+// topページのスタイル（dist後は全てのcssファイルをここに集める）
+#main {
+    h1 {
+        color: $color-theme;
+    }
 }
 
 @media screen and (max-width: $breakpoint) {
