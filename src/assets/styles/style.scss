@@ -1,3 +1,12 @@
+@import 'modules/color.scss';
+@import 'modules/breakpoint.scss';
+
 h1 {
-    color: green;
+    color: $color-theme;
+}
+
+@media screen and (max-width: $breakpoint) {
+    h1{
+        color: pink;
+    }
 }

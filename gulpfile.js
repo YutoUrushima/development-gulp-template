@@ -5,6 +5,7 @@ const sass = require('gulp-sass');
 const plumber = require('gulp-plumber');
 const notify = require('gulp-notify');
 const browserSync = require('browser-sync');
+const concatCss = require('gulp-concat-css');
 
 // パスの設定
 const paths = {
@@ -40,7 +41,12 @@ const Sass = (done) => {
       .pipe(
         plumber({ errorHandler: notify.onError('Error: <%= error.message %>') })
       )
-      .pipe(sass())
+      .pipe(sass({
+          outputStyle: 'expanded',
+      }))
+      .pipe(concatCss('styles.css', {
+          rebaseUrls: false,
+      }))
       .pipe(dest(paths.css));
     done();
 }
