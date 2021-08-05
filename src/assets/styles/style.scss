@@ -1,15 +1,19 @@
-@import 'modules/color.scss';
-@import 'modules/breakpoint.scss';
+@import "modules/color.scss";
+@import "modules/breakpoint.scss";
 
 // topページのスタイル（dist後は全てのcssファイルをここに集める）
 #main {
-    h1 {
-        color: $color-theme;
-    }
+  h1 {
+    color: $color-theme;
+  }
 }
 
 @media screen and (max-width: $breakpoint) {
-    h1{
-        color: pink;
-    }
+  h1 {
+    color: pink;
+  }
+}
+
+// stylelint 試し用
+.item {
 }
