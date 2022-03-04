@@ -1,6 +1,10 @@
-import Navigator from "./modules/utils/navigator.js";
+import sampleOutput from './modules/sample-module';
+import multiplication from './modules/calculator-module';
 
-const navigator = new Navigator();
-navigator.init();
 
-const width = window.innerWidth;
+sampleOutput();
+
+
+var item = 10;
+var price = 120;
+console.log(multiplication(item, price));
