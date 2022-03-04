@@ -1,4 +1,4 @@
 export default function sampleOutput() {
   console.log("sample-test");
-  console.log("done");
+  console.log("done2");
 }

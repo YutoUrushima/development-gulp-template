@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "npx gulp",
+    "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint src",
     "lint:css": "stylelint **/*.{css,scss,sass}"
